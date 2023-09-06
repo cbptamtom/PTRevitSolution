@@ -1,0 +1,164 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  This style can be applied to the MS TextBox control or to any control which is derived from it.  -->
+    <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="AllowDrop" Value="true" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Trebuchet MS" />
+        <Setter Property="FontSize" Value="12" />
+        <!--<Setter Property="FontWeight" Value="Bold" />-->
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="FocusedOn">
+                            <DoubleAnimationUsingKeyFrames
+                                BeginTime="00:00:00"
+                                Storyboard.TargetName="FocusVisualElement"
+                                Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="FocusedOff">
+                            <DoubleAnimationUsingKeyFrames
+                                BeginTime="00:00:00"
+                                Storyboard.TargetName="FocusVisualElement"
+                                Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="DisabledOn">
+                            <ObjectAnimationUsingKeyFrames
+                                BeginTime="00:00:00"
+                                Storyboard.TargetName="DisabledVisualElement"
+                                Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Visible}" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="DisabledOff">
+                            <ObjectAnimationUsingKeyFrames
+                                BeginTime="00:00:00"
+                                Storyboard.TargetName="DisabledVisualElement"
+                                Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Collapsed}" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <Grid>
+                        <Border
+                            x:Name="BorderBase"
+                            Margin="4"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" />
+                        <Border
+                            x:Name="FocusVisualElement"
+                            Margin="0"
+                            Background="#FFECF5FD"
+                            BorderBrush="#FFECF5FD"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            IsHitTestVisible="False"
+                            Opacity="0">
+                            <Border
+                                x:Name="InnerFocusVisualElement"
+                                Background="#FFE3F1FC"
+                                BorderBrush="#FFE3F1FC"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                IsHitTestVisible="False"
+                                Opacity="1">
+                                <Border
+                                    x:Name="InnerFocusVisualElement2"
+                                    Background="#FFD9ECFA"
+                                    BorderBrush="#FFD9ECFA"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    IsHitTestVisible="False"
+                                    Opacity="1">
+                                    <Border
+                                        x:Name="InnerFocusVisualElement3"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="#3366CC"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        IsHitTestVisible="False"
+                                        Opacity="1" />
+                                </Border>
+                            </Border>
+                        </Border>
+                        <Label
+                            x:Name="TextPrompt"
+                            Grid.Column="1"
+                            Margin="3"
+                            Content="{TemplateBinding Tag}"
+                            Focusable="False"
+                            Foreground="DimGray"
+                            Visibility="Collapsed" />
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Margin="3"
+                            Foreground="{TemplateBinding Foreground}" />
+                        <Border
+                            x:Name="DisabledVisualElement"
+                            Margin="3"
+                            Background="#A5FFFFFF"
+                            BorderBrush="#59C0C0C0"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            IsHitTestVisible="False"
+                            Visibility="Collapsed" />
+                        <Border
+                            x:Name="ReadOnlyVisualElement"
+                            Margin="3"
+                            Background="#66FFFFFF"
+                            Visibility="Collapsed" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="False" />
+                                <Condition Property="Text" Value="" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="TextPrompt" Property="Visibility" Value="Visible" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Trigger.ExitActions>
+                                <BeginStoryboard x:Name="FocusedOff_BeginStoryboard" Storyboard="{StaticResource FocusedOff}" />
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="FocusedOn_BeginStoryboard" Storyboard="{StaticResource FocusedOn}" />
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="DisabledOn_BeginStoryboard" Storyboard="{StaticResource DisabledOn}" />
+                            </Trigger.EnterActions>
+
+                            <Setter Property="Foreground" Value="Silver" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource DisabledOff}" />
+                            </Trigger.EnterActions>
+
+                            <Setter Property="Foreground" Value="#FF000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

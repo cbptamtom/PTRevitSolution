@@ -1,0 +1,281 @@
+﻿<Window
+    x:Class="NWCExporter.View.ExportOptionsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NWCExporter.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="OptionsView"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    SizeToContent="WidthAndHeight"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary Source="./../Library/Resource/Styles.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Convert construction parts" />
+        <CheckBox
+            x:Name="chbxConstructionParts"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.IsConvertParts, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Convert element Ids" />
+        <CheckBox
+            x:Name="chbxElementIds"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.IsConvertElemId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Convert element parameters" />
+        <CheckBox
+            x:Name="chbxElementProperies"
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.IsConvertElemParam, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Convert element properties" />
+        <CheckBox
+            x:Name="chbxLinkedFiles"
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.IsConvertElemProp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Convert linked files" />
+        <ComboBox
+            x:Name="cbConvertElParameters"
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="120"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding ExportOptionModel.ConvertLinkedFile}"
+            SelectedItem="{Binding ExportOptionModel.SelectedConvertLinkedFile}" />
+
+        <Label
+            Grid.Row="5"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Convert room as attribute" />
+        <CheckBox
+            x:Name="chbxRoomAttr"
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.IsConvertRoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="6"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Convert URLs" />
+        <CheckBox
+            x:Name="chbxConvertURL"
+            Grid.Row="6"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.IsConvertURL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="7"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Coordinates" />
+        <ComboBox
+            x:Name="cbCoordinates"
+            Grid.Row="7"
+            Grid.Column="1"
+            Width="120"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding ExportOptionModel.Coordinates}"
+            SelectedItem="{Binding ExportOptionModel.SelectedCoordinates}" />
+
+        <Label
+            Grid.Row="8"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Divide File into Levels" />
+        <CheckBox
+            x:Name="chbxDivideFiles"
+            Grid.Row="8"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.IsDivideLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="9"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Export" />
+        <ComboBox
+            x:Name="cbExport"
+            Grid.Row="9"
+            Grid.Column="1"
+            Width="120"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding ExportOptionModel.Export}"
+            SelectedItem="{Binding ExportOptionModel.SelectedExport}" />
+
+        <Label
+            Grid.Row="10"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Export room geometry" />
+        <CheckBox
+            x:Name="chbxExportGeometry"
+            Grid.Row="10"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.RoomGeometry, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <Label
+            Grid.Row="11"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Try and find missing materials" />
+        <CheckBox
+            x:Name="chbxMissingMaterials"
+            Grid.Row="11"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsChecked="{Binding ExportOptionModel.MissingMaterial, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Style="{StaticResource CheckBoxStyle}" />
+
+        <StackPanel
+            Grid.Row="12"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,10,0,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnDefault"
+                Width="100"
+                Height="30"
+                Margin="5,0,5,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Command="{Binding DefaultCommand}"
+                CommandParameter="{Binding ElementName=OptionsView}"
+                Content="Default"
+                FontWeight="Bold"
+                Style="{StaticResource ButtonStyle}" />
+            <Button
+                x:Name="btnClose"
+                Width="100"
+                Height="30"
+                Margin="5,0,5,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Command="{Binding CancelCommand}"
+                CommandParameter="{Binding ElementName=OptionsView}"
+                Content="Done"
+                Style="{StaticResource ButtonStyle}" />
+        </StackPanel>
+    </Grid>
+</Window>

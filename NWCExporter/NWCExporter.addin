@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>NWCExporter</Name>
+		<Assembly>NWCExporter\NWCExporter.dll</Assembly>
+		<AddInId>E2DBC0F1-CF3D-47F3-83B8-E34A46EA0B04</AddInId>
+		<FullClassName>NWCExporter.Button</FullClassName>
+		<VendorId>TamChau</VendorId>
+	</AddIn>
+</RevitAddIns>
+
