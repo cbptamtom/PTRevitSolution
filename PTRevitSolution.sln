@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IFCExporter", "IFCExporter\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitSyncExcel", "RevitSyncExcel\RevitSyncExcel.csproj", "{2BCF7C2C-11CB-4F55-BC8A-E46A3618C19D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantifyAUR", "QuantifyAUR\QuantifyAUR.csproj", "{06DB9B59-1EC1-414A-A67A-4797B2771742}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2BCF7C2C-11CB-4F55-BC8A-E46A3618C19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BCF7C2C-11CB-4F55-BC8A-E46A3618C19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BCF7C2C-11CB-4F55-BC8A-E46A3618C19D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06DB9B59-1EC1-414A-A67A-4797B2771742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06DB9B59-1EC1-414A-A67A-4797B2771742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06DB9B59-1EC1-414A-A67A-4797B2771742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06DB9B59-1EC1-414A-A67A-4797B2771742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

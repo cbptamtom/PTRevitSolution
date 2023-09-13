@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="RevitSyncExcel.View.ImporterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RevitSyncExcel.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <!-- Cột 1 -->
+            <ColumnDefinition Width="*" />
+            <!-- Cột 2 -->
+        </Grid.ColumnDefinitions>
+
+        <!-- ListBox cho cột 1 -->
+        <ListBox Grid.Column="0" x:Name="listBox1">
+            <!-- Đặt các mục danh sách và nội dung cho ListBox ở đây -->
+        </ListBox>
+
+        <!-- ListBox cho cột 2 -->
+        <ListBox Grid.Column="1" x:Name="listBox2">
+            <!-- Đặt các mục danh sách và nội dung cho ListBox ở đây -->
+        </ListBox>
+    </Grid>
+</UserControl>

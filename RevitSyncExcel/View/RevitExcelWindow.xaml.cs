@@ -5,18 +5,15 @@ using System.Windows.Input;
 
 namespace RevitSyncExcel
 {
-    public partial class APIWindow
+    public partial class RevitExcelWindow
     {
-        private RAPI00ViewModel _viewModel;
+        private RevitExcelViewModel _viewModel;
 
-        public APIWindow(RAPI00ViewModel viewModel)
+        public RevitExcelWindow(RevitExcelViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;
             this.DataContext = viewModel;
         }
-
-
-
     }
 }

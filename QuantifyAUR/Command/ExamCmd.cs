@@ -3,9 +3,9 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using RevitSyncExcel.Library.Filter;
-using RevitSyncExcel.Library.Orther;
-using RevitSyncExcel.Library.Unit;
+using QuantifyAUR.Library.Filter;
+using QuantifyAUR.Library.Orther;
+using QuantifyAUR.Library.Unit;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -14,10 +14,10 @@ using Application = Autodesk.Revit.ApplicationServices.Application;
 #endregion
 
 
-namespace RevitSyncExcel.Command
+namespace QuantifyAUR.Command
 {
     [Transaction(TransactionMode.Manual)]
-    public class RevitSyncExcelCmd : IExternalCommand
+    public class ExamCmd : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData,
             ref string message, ElementSet elements)
@@ -35,8 +35,8 @@ namespace RevitSyncExcel.Command
             {
                 transGr.Start("RAPI00TransGr");
 
-                RevitExcelViewModel viewModel = new RevitExcelViewModel(uidoc, doc);
-                RevitExcelWindow window = new RevitExcelWindow(viewModel);
+                QuantifyViewModel viewModel = new QuantifyViewModel(uidoc, doc);
+                APIWindow window = new APIWindow(viewModel);
                 if (window.ShowDialog() == false) return Result.Cancelled;
 
                 transGr.Assimilate();

@@ -14,20 +14,36 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace RevitSyncExcel
+namespace QuantifyAUR
 {
-    public class RAPI00ViewModel : BaseViewModel
+    public class QuantifyViewModel : BaseViewModel
     {
         public UIDocument UiDoc;
         public Document Doc;
+        private Categories _AllCategories;
+
+        public Categories AllCategories
+        {
+            get { return _AllCategories; }
+            set { _AllCategories = value; }
+        }
 
 
-        public RAPI00ViewModel(UIDocument uiDoc, Document doc)
+        public QuantifyViewModel(UIDocument uiDoc, Document doc)
         {
             UiDoc = uiDoc;
             Doc = doc;
 
+
+
+            GetAllCategories();
+            MessageBox.Show(AllCategories + "");
+
         }
 
+        private void GetAllCategories()
+        {
+            AllCategories = Doc.Settings.Categories;
+        }
     }
 }

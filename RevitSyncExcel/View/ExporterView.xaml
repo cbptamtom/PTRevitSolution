@@ -1,0 +1,102 @@
+﻿<UserControl
+    x:Class="RevitSyncExcel.View.ExporterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:RevitSyncExcel.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="ExportView"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./../Library/Resource/Styles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Flyout.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <!--  Các thành phần giao diện của bạn  -->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <!--  GroupBox 1  -->
+        <GroupBox
+            Grid.ColumnSpan="2"
+            Margin="5,5,5,5"
+            BorderBrush="Black"
+            BorderThickness="1"
+            Header="Schedules/Quantities"
+            Style="{DynamicResource MahApps.Styles.GroupBox.Clean}">
+            <Grid>
+                <!--  Grid 1 cho checkboxes  -->
+
+                <ListBox
+                    Grid.Row="1"
+                    Margin="0"
+                    FontSize="14"
+                    ItemsSource="{Binding RevitExcelModel.ExporterModel.ScheduleObjects, Mode=TwoWay}"
+                    >
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                Content="{Binding Name}"
+                                IsChecked="{Binding Selected, Mode=TwoWay}"
+                                Style="{DynamicResource CheckBoxStyle}"
+                                 />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </GroupBox>
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnExport"
+                Width="100"
+                Height="40"
+                Margin="5,0,5,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding ExportCommand}"
+                CommandParameter="{Binding ElementName=ExportView}"
+                Content="Export"
+                FontWeight="Bold"
+                Style="{StaticResource ButtonStyle}" />
+            <Button
+                x:Name="btnClose"
+                Width="100"
+                Height="40"
+                Margin="5,0,5,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding CancelCommand}"
+                CommandParameter="{Binding ElementName=ExportView}"
+                Content="Cancel"
+                Style="{StaticResource ButtonStyle}" />
+
+        </StackPanel>
+    </Grid>
+</UserControl>
