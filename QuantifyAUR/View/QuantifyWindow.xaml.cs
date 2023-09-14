@@ -5,11 +5,11 @@ using System.Windows.Input;
 
 namespace QuantifyAUR
 {
-    public partial class APIWindow
+    public partial class QuantifyWindow
     {
         private QuantifyViewModel _viewModel;
 
-        public APIWindow(QuantifyViewModel viewModel)
+        public QuantifyWindow(QuantifyViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;

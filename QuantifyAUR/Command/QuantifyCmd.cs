@@ -17,7 +17,7 @@ using Application = Autodesk.Revit.ApplicationServices.Application;
 namespace QuantifyAUR.Command
 {
     [Transaction(TransactionMode.Manual)]
-    public class ExamCmd : IExternalCommand
+    public class QuantifyCmd : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData,
             ref string message, ElementSet elements)
@@ -36,7 +36,7 @@ namespace QuantifyAUR.Command
                 transGr.Start("RAPI00TransGr");
 
                 QuantifyViewModel viewModel = new QuantifyViewModel(uidoc, doc);
-                APIWindow window = new APIWindow(viewModel);
+                QuantifyWindow window = new QuantifyWindow(viewModel);
                 if (window.ShowDialog() == false) return Result.Cancelled;
 
                 transGr.Assimilate();
