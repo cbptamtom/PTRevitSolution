@@ -26,6 +26,7 @@ namespace QuantifyAUR.Model
                 {
                     _selected = value;
                     OnPropertyChanged(nameof(Selected));
+
                 }
             }
         }
