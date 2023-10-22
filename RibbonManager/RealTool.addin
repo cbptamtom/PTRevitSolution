@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>Real Tool</Name>
+		<Assembly>RibbonManager.dll</Assembly>
+		<AddInId>3B6459E6-C09C-42D7-9C89-20F922A54D42</AddInId>
+		<FullClassName>RibbonManager.RibbonManager</FullClassName>
+		<VendorId>RealTool</VendorId>
+	</AddIn>
+</RevitAddIns>

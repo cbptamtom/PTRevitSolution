@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using QuantifyAUR.Library.Unit;
 using QuantifyAUR.Revit;
 using System;
@@ -6,7 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
+using static QuantifyAUR.Excel.ExcelService;
 
 namespace QuantifyAUR.Model
 {
@@ -38,6 +41,11 @@ namespace QuantifyAUR.Model
         private string _revitName;
         public string RevitName { get { return _revitName; } set { _revitName = value; OnPropertyChanged(); } }
 
+        private List<Element> _InstanceElemInProject;
+        public List<Element> InstanceElemInProject { get { return _InstanceElemInProject; } set { _InstanceElemInProject = value; OnPropertyChanged(); } }
+
+        private List<string> _InstanceElemNameInProject;
+        public List<string> InstanceElemNameInProject { get { return _InstanceElemNameInProject; } set { _InstanceElemNameInProject = value; OnPropertyChanged(); } }
 
 
 
@@ -50,6 +58,8 @@ namespace QuantifyAUR.Model
             CategoriesWithVolume = RevitService.GetCategoriesHasVolume();
             CategoriesData = RevitService.PopulateCategoriesObject(CategoriesWithVolume);
             RevitName = RevitService.GetProjectInformationData().ProjectName;
+            InstanceElemInProject = RevitService.GetElementsByCategories(RevitService.categoriesToInclude.ToList());
+
         }
 
 
@@ -70,7 +80,6 @@ namespace QuantifyAUR.Model
             }
             return Elements;
         }
-
         public void GetAliasValues()
         {
             AliasValues = new List<string>();
@@ -84,7 +93,6 @@ namespace QuantifyAUR.Model
                 }
             }
         }
-
         public void GetUnitQuantityValues()
         {
             UnitQuantity = new List<string>();
@@ -98,34 +106,33 @@ namespace QuantifyAUR.Model
                 }
             }
         }
-
         public void CombineData(List<Element> elements, List<string> aliasValues, List<string> unitQuantity)
         {
             CombinedData = new List<Tuple<Element, string, double>>();
             for (int i = 0; i < elements.Count; i++)
             {
                 Element element = elements[i];
-                string[] aliases = aliasValues[i].Split(';');
-                string[] unitQuantities = unitQuantity[i].Split(';');
+                char[] separators = new char[] { ';', '/' };
+                string[] aliases = aliasValues[i].Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                string[] unitQuantities = unitQuantity[i].Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
                 int minLength = Math.Min(aliases.Length, unitQuantities.Length);
                 double volume = GetVolumeForElement(element);
                 for (int j = 0; j < minLength; j++)
                 {
-                    double unitQtyValue = double.Parse(unitQuantities[j]) * volume;
-                    CombinedData.Add(new Tuple<Element, string, double>(element, aliases[j], unitQtyValue));
+                    if (double.TryParse(unitQuantities[j], out double unitQtyValue))
+                    {
+                        unitQtyValue *= volume;
+                        CombinedData.Add(new Tuple<Element, string, double>(element, aliases[j], unitQtyValue));
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Wrong Unit Quantity for {element.Name}, value: {unitQuantities[j]}");
+                        return;
+                    }
                 }
             }
         }
-
-        //public void CombineData(List<Element> elements, List<string> aliasValues, List<string> unitQuantity)
-        //{
-        //    CombinedData = elements.SelectMany((element, index) =>
-        //        aliasValues[index].Split(';')
-        //        .Zip(unitQuantity[index].Split(';'), (alias, unitQty) =>
-        //            new Tuple<Element, string, string>(element, alias, unitQty)))
-        //        .ToList();
-        //}
 
         public Dictionary<string, double> SumUnitQtyValuesByAliases(List<Tuple<Element, string, double>> combinedData)
         {
@@ -149,8 +156,6 @@ namespace QuantifyAUR.Model
             }
             return SumByAliasesDictionary;
         }
-
-
         private double GetVolumeForElement(Element element)
         {
             Parameter volumeParam = element.LookupParameter("Volume");
@@ -163,6 +168,8 @@ namespace QuantifyAUR.Model
                 return 0.0;
             }
         }
+
+
     }
 
 }

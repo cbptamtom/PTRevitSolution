@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="ManageFilterColor.View.UserControl1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ManageFilterColor.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:ManageFilterColor.ViewModel"
+    x:Name="uc1"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+    mc:Ignorable="d">
+
+
+
+    <Grid>
+        <DataGrid Name="dataGrid" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ViewName}" Header="View Name" />
+                <DataGridComboBoxColumn Header="Category" ItemsSource="{Binding Categories}" />
+                <DataGridComboBoxColumn Header="Filter Type" ItemsSource="{Binding FilterTypes}" />
+                <DataGridTextColumn Binding="{Binding FilterValue}" Header="Filter Value" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button
+            x:Name="btnExport"
+            Width="100"
+            Height="40"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding ClickCommand}"
+            CommandParameter="{Binding ElementName=MainWindow}"
+            Content="Calculation"
+            FontWeight="Bold" />
+    </Grid>
+</UserControl>

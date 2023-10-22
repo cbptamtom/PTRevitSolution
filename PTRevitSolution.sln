@@ -11,6 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitSyncExcel", "RevitSync
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantifyAUR", "QuantifyAUR\QuantifyAUR.csproj", "{06DB9B59-1EC1-414A-A67A-4797B2771742}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonManager", "RibbonManager\RibbonManager.csproj", "{C4D9F47A-B60E-47E6-8B44-61948A5AE451}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFilterColor", "ManageFilterColor\ManageFilterColor.csproj", "{2F58B1FC-69CC-4461-9E89-E1F077661D0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingNavigation", "AmazingNavigation\AmazingNavigation.csproj", "{2FF49524-032D-4F39-AF44-6000D1FDECBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismRevitProject", "PrismRevitProject\PrismRevitProject.csproj", "{B69B6F97-5288-4AFE-AFDC-2052BDE3A248}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullTool", "NullTool\NullTool.csproj", "{007BBEC4-D655-413E-B816-C693188715B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarbonAnalysis", "CarbonAnalysis\CarbonAnalysis.csproj", "{A0EFC0AD-92C8-4669-A6B9-93B0B8CEA389}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +45,30 @@ Global
 		{06DB9B59-1EC1-414A-A67A-4797B2771742}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06DB9B59-1EC1-414A-A67A-4797B2771742}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06DB9B59-1EC1-414A-A67A-4797B2771742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D9F47A-B60E-47E6-8B44-61948A5AE451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D9F47A-B60E-47E6-8B44-61948A5AE451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D9F47A-B60E-47E6-8B44-61948A5AE451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D9F47A-B60E-47E6-8B44-61948A5AE451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F58B1FC-69CC-4461-9E89-E1F077661D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F58B1FC-69CC-4461-9E89-E1F077661D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F58B1FC-69CC-4461-9E89-E1F077661D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F58B1FC-69CC-4461-9E89-E1F077661D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF49524-032D-4F39-AF44-6000D1FDECBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF49524-032D-4F39-AF44-6000D1FDECBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF49524-032D-4F39-AF44-6000D1FDECBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF49524-032D-4F39-AF44-6000D1FDECBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69B6F97-5288-4AFE-AFDC-2052BDE3A248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69B6F97-5288-4AFE-AFDC-2052BDE3A248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69B6F97-5288-4AFE-AFDC-2052BDE3A248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69B6F97-5288-4AFE-AFDC-2052BDE3A248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{007BBEC4-D655-413E-B816-C693188715B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007BBEC4-D655-413E-B816-C693188715B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007BBEC4-D655-413E-B816-C693188715B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007BBEC4-D655-413E-B816-C693188715B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0EFC0AD-92C8-4669-A6B9-93B0B8CEA389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0EFC0AD-92C8-4669-A6B9-93B0B8CEA389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0EFC0AD-92C8-4669-A6B9-93B0B8CEA389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0EFC0AD-92C8-4669-A6B9-93B0B8CEA389}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

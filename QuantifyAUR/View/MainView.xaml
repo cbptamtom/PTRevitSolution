@@ -1,0 +1,41 @@
+﻿<Window
+    x:Class="QuantifyAUR.View.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuantifyAUR.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./../Library/Resource/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+
+
+    <TabControl>
+        <!--  Tab 1  -->
+        <TabItem Header="Configuation Data">
+            <!--  Đặt nội dung cho Tab 1 ở đây  -->
+            <StackPanel>
+                <Button Content="Import" />
+                <Button Content="Export" />
+            </StackPanel>
+        </TabItem>
+
+        <!--  Tab 2  -->
+        <TabItem Header="Calculation">
+            <!--  Đặt nội dung cho Tab 2 ở đây  -->
+            <!--  QuantifyView và ResultView có thể được đặt ở đây  -->
+        </TabItem>
+    </TabControl>
+</Window>

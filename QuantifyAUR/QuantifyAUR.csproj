@@ -142,6 +142,9 @@
     <Compile Include="ViewModel\QuantifyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ResultViewModel.cs" />
+    <Compile Include="View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuantifyWindow.xaml.cs">
       <DependentUpon>QuantifyWindow.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
     <Page Include="Library\Resource\WrapPanelStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuantifyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

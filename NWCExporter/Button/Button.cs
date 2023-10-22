@@ -17,8 +17,6 @@ namespace NWCExporter
         private const string tabName = "AUR Green Structure";
         public Result OnShutdown(UIControlledApplication application)
         {
-
-
             return Result.Succeeded;
         }
 
@@ -44,9 +42,6 @@ namespace NWCExporter
             return Result.Succeeded;
 
         }
-
-
-
         private RibbonPanel GetOrCreateRibbonPanel(UIControlledApplication application)
         {
             application.CreateRibbonTab(tabName);

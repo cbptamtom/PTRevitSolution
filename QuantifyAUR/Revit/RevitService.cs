@@ -9,12 +9,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using static QuantifyAUR.Excel.ExcelService;
 using Parameter = Autodesk.Revit.DB.Parameter;
 
 namespace QuantifyAUR.Revit
 {
     public class RevitService : BaseViewModel
     {
+        public BuiltInCategory[] categoriesToInclude = new BuiltInCategory[]
+           {
+                BuiltInCategory.OST_StructuralFraming,
+                BuiltInCategory.OST_StructuralColumns,
+                BuiltInCategory.OST_Floors,
+                BuiltInCategory.OST_StructuralFoundation,
+                BuiltInCategory.OST_Walls
+           };
         private Document _document;
         public RevitService(Document document)
         {
@@ -87,10 +96,6 @@ namespace QuantifyAUR.Revit
 
             return categoriesData;
         }
-
-
-
-
         public void CreateSharedParameterAndBindToCategoriesIfNotExist(string parameterName, ForgeTypeId parameterType, string groupName, List<Category> categories)
         {
             ExternalDefinition existingDefinition = GetExternalDefinitions(parameterName).FirstOrDefault();
@@ -125,7 +130,6 @@ namespace QuantifyAUR.Revit
                 }
             }
         }
-
         private void BindSharedParameterToCategories(ExternalDefinition definition, List<Category> categories)
         {
             using (Transaction transaction = new Transaction(_document, "Bind Shared Parameter to Categories"))
@@ -150,13 +154,6 @@ namespace QuantifyAUR.Revit
                 transaction.Commit();
             }
         }
-
-
-
-
-
-
-
         public List<ExternalDefinition> GetExternalDefinitions(string sharedParameterName)
         {
             // Get the shared parameter definition from the document
@@ -184,6 +181,58 @@ namespace QuantifyAUR.Revit
 
             return externalDefinitions;
         }
+        public List<Element> GetElementsByCategories(List<BuiltInCategory> categories)
+        {
+            List<Element> elements = new List<Element>();
+            foreach (BuiltInCategory category in categories)
+            {
+                elements.AddRange(new FilteredElementCollector(_document)
+                    .OfCategory(category)
+                    .WhereElementIsNotElementType()
+                    .ToList());
+            }
+            return elements;
+        }
+        public List<Category> GetCategoriesByBuiltInCategories(BuiltInCategory[] categoriesToInclude)
+        {
+            return categoriesToInclude
+                .Select(bic => Category.GetCategory(_document, bic))
+                .Where(category => category != null)
+                .ToList();
+        }
+        public void MapExcelDataToElements(List<ExcelData> excelDataList)
+        {
+            using (Transaction transaction = new Transaction(_document, "Map Excel Data to Elements"))
+            {
+                transaction.Start();
+
+                List<Element> allElements = new FilteredElementCollector(_document)
+                    .WhereElementIsNotElementType()
+                    .ToList();
+
+                foreach (ExcelData excelData in excelDataList)
+                {
+                    foreach (Element element in allElements)
+                    {
+                        if (element.Name == excelData.ElementName)
+                        {
+                            Parameter aliasParameter = element.LookupParameter("Alias");
+                            Parameter unitQuantityParameter = element.LookupParameter("Unit Quantity");
+
+                            if (aliasParameter != null && unitQuantityParameter != null)
+                            {
+                                aliasParameter.Set(excelData.Alias);
+                                unitQuantityParameter.Set(excelData.UnitQuantity);
+                            }
+                        }
+                    }
+                }
+
+                transaction.Commit();
+                TaskDialog.Show("Success", "Excel data has been mapped to elements.");
+            }
+        }
+
 
     }
 }

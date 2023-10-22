@@ -1,0 +1,49 @@
+﻿<Window
+    x:Class="AUR_Foundation_Reinforcement.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewmodels="clr-namespace:AUR_Foundation_Reinforcement.ViewModels"
+    xmlns:views="clr-namespace:AUR_Foundation_Reinforcement.Views"
+    Title="AUR_Foundation_Reinforcement"
+    Width="500"
+    Height="350">
+
+
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type viewmodels:ColumnViewModel}">
+            <views:ColumnView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:FrammingViewModel}">
+            <views:FramingView />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!--  Navigator Column (Bên trái)  -->
+            <ColumnDefinition Width="Auto" />
+
+            <!--  Content Column (Bên phải)  -->
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Navigator (Bên trái)  -->
+        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+            <Button
+                Margin="10"
+                Command="{Binding ShowColumnViewCommand}"
+                Content="Show Columns" />
+            <Button
+                Margin="10"
+                Command="{Binding ShowFramingViewCommand}"
+                Content="Show Framing" />
+        </StackPanel>
+
+        <!--  Content (Bên phải)  -->
+        <ContentControl
+            x:Name="MainContent"
+            Grid.Column="1"
+            Content="{Binding CurrentView}" />
+    </Grid>
+</Window>

@@ -6,11 +6,14 @@ using QuantifyAUR.Library.Filter;
 using QuantifyAUR.Library.Orther;
 using QuantifyAUR.Library.Unit;
 using QuantifyAUR.Revit;
+using QuantifyAUR.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
+using Application = Autodesk.Revit.ApplicationServices.Application;
 
-namespace QuantifyAUR.Command
+namespace QuantifyAUR
 {
     [Transaction(TransactionMode.Manual)]
     public class QuantifyCmd : IExternalCommand
@@ -23,7 +26,11 @@ namespace QuantifyAUR.Command
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
+
+            List<Category> cates = new List<Category>();
+            List<Element> elementsToInclude = new List<Element>();
             RevitService revitSv = new RevitService(doc);
+
             BuiltInCategory[] categoriesToInclude = new BuiltInCategory[]
             {
                 BuiltInCategory.OST_StructuralFraming,
@@ -33,31 +40,22 @@ namespace QuantifyAUR.Command
                 BuiltInCategory.OST_Walls
             };
 
-            List<Category> cates = categoriesToInclude
-                .Select(bic => Category.GetCategory(doc, bic))
-                .Where(category => category != null)
-                .ToList();
-
-            List<Element> elementsToInclude = categoriesToInclude
-                .SelectMany(bic => new FilteredElementCollector(doc)
-                .OfCategory(bic)
-                .WhereElementIsNotElementType())
-                .ToList();
+            cates = revitSv.GetCategoriesByBuiltInCategories(categoriesToInclude);
+            elementsToInclude = revitSv.GetElementsByCategories(categoriesToInclude.ToList());
 
             if (elementsToInclude.Count == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Model có con mẹ gì đâu mà run.");
+                MessageBox.Show("There are no elements to work with.");
                 return Result.Cancelled;
             }
-
-            Element e = elementsToInclude.FirstOrDefault();
+            Element fiste = elementsToInclude.FirstOrDefault();
 
             bool hasAlias = false;
             bool hasUnitQuantity = false;
 
-            if (e != null)
+            if (fiste != null)
             {
-                ParameterSet pSet = e.Parameters;
+                ParameterSet pSet = fiste.Parameters;
                 List<Parameter> parameters = pSet.Cast<Parameter>().ToList();
                 hasAlias = parameters.Any(p => p.Definition.Name == "Alias");
                 hasUnitQuantity = parameters.Any(p => p.Definition.Name == "Unit Quantity");
@@ -67,10 +65,7 @@ namespace QuantifyAUR.Command
 
             using (TransactionGroup transGr = new TransactionGroup(doc))
             {
-                transGr.Start("RAPI00TransGr");
-
-
-
+                transGr.Start("Calculation");
                 if (!hasAlias || !hasUnitQuantity)
                 {
                     try
@@ -86,8 +81,9 @@ namespace QuantifyAUR.Command
                             revitSv.CreateSharedParameterAndBindToCategoriesIfNotExist("Unit Quantity", SpecTypeId.String.Text, "Unit Quantity", cates);
                         }
 
-                        message = "Đã tạo shared parameters. Chạy lại phần mềm để tiếp tục tính toán.";
+                        message = "Parameters have been created";
                         TaskDialog.Show("Thông báo", message);
+
                     }
                     catch (Exception ex)
                     {
@@ -96,12 +92,8 @@ namespace QuantifyAUR.Command
                         return Result.Failed;
                     }
                 }
-                bool check = e.LookupParameter("Alias").AsString() == null || e.LookupParameter("Unit Quantity").AsString() == null;
-                if (check)
-                {
-                    TaskDialog.Show("Thông báo", "Cap nhat gia trị cho Alias, Unit Quantity");
-                }
-                if (showQuantifyWindow && e.LookupParameter("Alias").AsString() != null && e.LookupParameter("Unit Quantity").AsString() != null)
+
+                else
                 {
                     QuantifyViewModel viewModel = new QuantifyViewModel(uidoc, doc);
                     QuantifyWindow window = new QuantifyWindow(viewModel);
